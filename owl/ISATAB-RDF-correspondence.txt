@@ -322,8 +322,6 @@ Resource Identifier (URI).
 * http://toxbank.*/protocol/{id} 
 
 -Study Protocol Version
-Release candidate 1, ISA-TAB v1.0
-14 of 36
 An identifier for the version to ensure protocol tracking.
 
 * <protocol> dcterms:hasVersion "the-version".
@@ -334,6 +332,9 @@ document. These names are used in the Study and Assay files (in the "Parameter V
 name>]" column heading) to list the values used for each protocol parameter. Refer to section
 Multiple values fields in the Investigation File on how to encode multiple values in one field and match
 term sources
+
+* This could go into Protocol Templates/protocol/id/template , together with parameter definitions
+* Values are study specific
 
 -Study Protocol Parameters Term Accession Number
 The accession number from the Term Source associated with the selected term.
@@ -448,4 +449,123 @@ the Study file column’s headers, organizing them as nodes (potentially containin
 previously referred to as ‘sections’), and attributes (previously referred to as ‘fields’) for nodes and node
 processing events, qualifiers for node attributes, and other valid fields.
 
+* Studies generally describe the subject of the study, how they are prepared. 
+* The results are in the assay files.
 
+------
+
+4.2.1 Study nodes
+
+* ??? These are the steps of the study in fact !
+
+-Source Name
+
+Sources are considered as the starting biological material used in a study. Source items can be
+qualified using the following headers: 
+
+--Characteristics [ ], 
+--Material Type, 
+--Term Source REF, 
+--Term
+--Accession Number, 
+--Unit, 
+--Provider, 
+--Description, and Comment [ ].
+
+-Sample Name
+
+Samples represent major outputs resulting from a protocol application other than the special case
+outputs of Extract or a Labeled Extract. Sample items can be qualified using the following headers:
+
+--Characteristics [ ]
+--Material Type
+--Term Accession Number
+--Term Source REF
+--Unit
+--Comment [ ].
+
+------
+
+4.2.2 Attributes of Study nodes
+
+* Are these Study "factors" ?
+
+-Material Type
+Used as an attribute column following Source Name, or Sample Name. The term can be free text or
+from, for example, a controlled vocabulary or an ontology (e.g. whole organism, organism part). If the
+latter source is used the Term Accession Number and Term Source REF fields below are required.
+
+-Characteristics [<category term>]
+Used as an attribute column following Source Name, Sample Name. This column contains terms
+describing each material according to the characteristics category indicated in the column header. For
+example, a column header "Characteristics [organism part]" would contain terms describing an
+organism part. The term can be free text or from, for example, a controlled vocabulary or an ontology.
+If the latter source is used the Term Accession Number and Term Source REF fields are required. If
+the characteristic being reported is a measurement, a Unit column (with qualifying Term Source REF
+and Term Accession Number) may be also be used
+
+- Provider ([STDYID])
+Used as an attribute column following Source Name. It can be appended with the [STDYID] tag only
+in the context of referencing Sources used in a SDTM data submission. This mechanism would allow
+listing subject identifiers coming from several different SDTM submissions. See section 5.3 for
+implementation guidelines.
+
+-------
+
+4.2.3 Attributes of processing events for Study nodes
+
+-Protocol REF
+One or more Protocol REF columns should be used to specify the method used to transform a
+material or a data node. This column contains a reference to a Protocol Name (previously defined in
+the Investigation File) or to accession numbers of protocols already present in public repositories.
+Protocol REF can be further refined with the following elements:
+
+-Parameter Value [<parameter term>]
+The field allows reporting on the values taken by the parameter when applying a protocol.
+Note that the term between [ ] must map to one (and only one) of parameters defined in the
+investigation file. Values can be qualitative or quantitative. Refer to section 5 on design
+pattern for additional information.
+
+-Performer
+Name of the operator who carried out the protocol. This allows account to be taken of
+operator effects and can be part of a quality control data tracking.
+
+-Date
+The date on which a protocol is performed. This allows account to be taken of day effects and
+can be part of a quality control data tracking. Dates should be reported in ISO format (YYYYMM-
+DD).
+
+------
+
+4.2.4 Qualifiers for the Study nodes’ attributes
+
+-Unit
+Used if the terms provided in the Characteristics [ ], Parameter Value [ ] or FactorValue [ ] column
+classify data that are dimensional.
+
+-Term Accession Number
+The accession number from the Term Source associated with the selected term, if this is from, for
+example, a controlled vocabulary or an ontology. Qualifies the following headers Characteristics [ ],
+Material Type, Parameter Value [ ] or FactorValue [ ] and Unit.
+
+-Term Source REF
+Identifies the controlled vocabulary or ontology that the selected term comes from. The Source REF
+has to match a Term Source Name previously declared in the ontology section 4.1.1.
+
+------
+
+4.2.5 Other Study file fields
+
+- Factor Value [<factor name>]
+
+A factor is an independent variable manipulated by an experimentalist with the intention to affect
+biological systems in a way that can be measured by an assay. This field holds the actual data for the
+Factor Value named between the square brackets (as declared in the Investigation file, section
+4.1.3.4); for example, Factor Value [compound]. Qualifiers for Factor Values, are: Unit, Unit Term
+Accession Number and Unit Term Source REF in case of quantitative values, and Term Accession
+Number and Term Source REF in case of qualitative values. See section 5.2 for examples.
+
+* make use of a construct similar to ot:FeatureValue to hold values
+
+- Comment
+Comment columns can be added to provide additional information, but only when no other appropriate field exists.
