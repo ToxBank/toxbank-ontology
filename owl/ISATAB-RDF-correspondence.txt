@@ -922,3 +922,71 @@ Node Name | Protocol REF | Performer | Date | Node Name
 
 * This is quite close to the OpenTox concept of a procesing algorithm  dataset -- (algorithm) --> dataset 
 * The links could be made explicit in RDF
+
+------
+
+5.1.1 Pooling or joining nodes
+
+two or more parent nodes contribute to the creation of the same child node.
+Example1:
+
+Source Name Protocol REF Sample Name
+Source1 PoolP1 Sample1
+Source2 PoolP1 Sample1
+Source3 PoolP1 Sample1
+Source4 PoolP1 Sample1
+
+Example2: several labeled extract materials that are put on the same gel
+
+Labeled Extract Name Label Protocol REF Gel Electrophoresis Assay Name
+LabeledExtract1 Cy3 GelP Gel1
+LabeledExtract2 Cy3 GelP Gel1
+LabeledExtract3 Cy5 GelP Gel1
+
+* TODO represent the workflow in RDF
+
+------
+
+5.1.2 Splitting nodes
+
+one node is processed and generates two or more children nodes
+
+Example 1
+shows two splitting events, where two samples (children nodes) are derived from the same source (parent node)
+
+Source Name | Material Type | Protocol REF | Sample Name
+Animal1 |  whole organism | organ_removal_Pl Animal1.liver
+Animal1 | whole organism | organ_removal_Pk Animal1.kidney
+Animal2 | whole organism | organ_removal_Pl Animal2.liver
+Animal2 | whole organism | organ_removal_Pk Animal2.kidney
+
+Example 2:
+
+Hybridization Assay Name | Scan Name | Image File
+Hybridization1 | Scan1 | Image1.tiff
+Hybridization1 | Scan1 | Image2.tiff
+
+* TODO represent the workflow in RDF
+
+-------
+5.2 Representing node qualifiers
+
+how to represent qualitative values for three different nodes (Characteristics [ ],
+Factor Value [ ] and Parameter Value [ ]), when terms for the values are from a controlled vocabulary or
+ontology:
+
+
+Example:
+Characteristics [organism part] Term Accession Number Term Source REF
+Liver CARO:123424 CARO
+
+Factor Value [compound] Term Accession Number Term Source REF
+Aspirin CHEBI:15365 CHEBI
+
+Parameter Value [detector] Term Accession Number Term Source REF
+Channeltron PSI:1000107 PSI
+
+* This should be trivial in RDF , explained above for factors
+
+----
+
