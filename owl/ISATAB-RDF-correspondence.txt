@@ -227,7 +227,14 @@ match one of the Term Source Name declared in the ontology section 4.1.1.
 
 ------
 4.1.3.5 STUDY ASSAYS
+
 The Study Assay section declares and describes each of the Assay files associated with the current Study.
+
+* This seems just to establish links between studies and assays
+* Isn't it better to have Assay metadata in the Assays themselves, and just link Study and Assay URIs?
+* <study1> tb:hasAssay <Assay1>.
+
+
 Study Assay Measurement Type
 A term to qualify the endpoint, or what is being measured (e.g. gene expression profiling or protein
 identification). The term can be free text or from, for example, a controlled vocabulary or an ontology.
@@ -239,6 +246,8 @@ The accession number from the Term Source associated with the selected term.
 
 -Study Assay Measurement Type Term Source REF
 The Source REF has to match one of the Term Source Name declared in the ontology section 4.1.1.
+
+* <assay> tb:hasMeasurementType <assay-measurement-ontology-entry>.  //could EFO be used again? 
 
 -Study Assay Technology Type
 Term to identify the technology used to perform the measurement, e.g. DNA microarray, mass
@@ -256,9 +265,187 @@ match one of the Term Source Names declared in the ontology section 4.1.1.
 -Study Assay Technology Platform
 Manufacturer and platform name, e.g. Bruker AVANCE
 
+* <assay> tb:hasTechnology <assay-technology-ontology-entry>.  //could EFO be used again? 
+
+
 - Study Assay File Name
 A field to specify the name of the Assay file corresponding the definition of that assay. There can be
 only one file per cell. In case, implementers wish to split the Assay Files on their nodes, a process
 which results in multiple files being necessary to report the same information, they should create a
 bundle archive with files and report the name of the archive, thereby complying with the one file only
 rule.
+
+* Assay URI or file when exporting as ISA-TAB
+* Again /assay/{id}  for metadata and /assay/{id}/file for files
+
+
+------
+4.1.3.6 STUDY PROTOCOLS
+
+* Protocols - we have separate resource for protocols - could just link them to studies - or to assays - or both? 
+* <study> 
+
+-Study Protocol Name
+The name of the protocols used within the ISA-TAB document. The names are used as identifiers
+within the ISA-TAB document and will be referenced in the Study and Assay files in the Protocol REF
+columns. Names can be either local identifiers, unique within the ISA Archive which contains them, or
+fully qualified external accession numbers.
+
+* <protocol> dcterms:title "the-name".
+* <study> tb:hasProtocol <protocol>.
+
+-Study Protocol Type
+Term to classify the protocol. The term can be free text or from, for example, a controlled vocabulary
+or an ontology. If the latter source is used the Term Accession Number and Term Source REF fields
+below are required.
+
+-Study Protocol Type Term Accession Number
+The accession number from the Term Source associated with the selected term.
+
+-Study Protocol Type Term Source REF
+Identifies the controlled vocabulary or ontology that this term comes from. The Source REF has to
+match one of the Term Source Name declared in the ontology section 4.1.1.
+
+* <protocol> rdf:type <protocol in EFO>  .
+* <protocol in EFO> - any of subclasses of http://purl.obolibrary.org/obo/OBI_0000272
+* or protocols, defined in other ontologies
+
+-Study Protocol Description
+A free-text description of the protocol.
+
+* <protocol> dcterms:abstract "the-description".
+
+-Study Protocol URI
+Pointer to protocol resources external to the ISA-TAB that can be accessed by their Uniform
+Resource Identifier (URI).
+
+* http://toxbank.*/protocol/{id} 
+
+-Study Protocol Version
+Release candidate 1, ISA-TAB v1.0
+14 of 36
+An identifier for the version to ensure protocol tracking.
+
+* <protocol> dcterms:hasVersion "the-version".
+
+-Study Protocol Parameters Name
+A semicolon-delimited (";") list of parameter names, used as an identifier within the ISA-TAB
+document. These names are used in the Study and Assay files (in the "Parameter Value [<parameter
+name>]" column heading) to list the values used for each protocol parameter. Refer to section
+Multiple values fields in the Investigation File on how to encode multiple values in one field and match
+term sources
+
+-Study Protocol Parameters Term Accession Number
+The accession number from the Term Source associated with the selected term.
+
+-Study Protocol Parameters Term Source REF
+Identifies the controlled vocabulary or ontology that this term comes from. The Source REF has to
+match one of the Term Source Name declared in the ontology section 4.1.1.
+
+* These are likely the "fixed factors" discussed, for protocols.
+* 
+* <protocol> tb:hasParameter <ProtocolParameter>.
+* <ProtocolParameter> rdf:type <entry-from-protocol-ontology>
+
+-Study Protocol Components Name
+A semicolon-delimited (";") list of a protocol’s components; e.g. instrument names, software names,
+and reagents names. Refer to section Multiple values fields in the Investigation File on how to encode
+multiple components in one field and match term sources.
+
+-Study Protocol Components Type
+Term to classify the protocol components listed for example, instrument, software, detector or
+reagent. The term can be free text or from, for example, a controlled vocabulary or an ontology. If the
+latter source is used the Term Accession Number and Term Source REF fields below are required.
+
+-Study Protocol Components Type Term Accession Number
+The accession number from the Source associated to the selected terms.
+
+-Study Protocol Components Type Term Source REF
+Identifies the controlled vocabulary or ontology that this term comes from. The Source REF has to
+match a Term Source Name previously declared in the ontology section 4.1.1.
+
+
+* These are likely the "fixed factors" discussed, for protocols.
+* 
+* <protocol> tb:hasComponent <ProtocolComponent>.
+* <ProtocolComponent> rdf:type <entry-from-protocol-ontology>
+
+
+------
+
+4.1.3.7 STUDY CONTACTS
+
+* we could address these by refering to user URI 
+* <study> tb:hasOwner <user>.
+* <study> tb:hasAuthor <user>.
+
+-Study Person Last Name
+The last name of a person associated with the study.
+
+-Study Person First Name
+The first name of a person associated with the study.
+
+-Study Person Mid Initials
+The middle initials of a person associated with the study.
+
+-Study Person Email
+The email address of a person associated with the study
+
+-Study Person Phone
+The telephone number of a person associated with the study.
+
+-Study Person Fax
+The fax number of a person associated with the study.
+
+-Study Person Address
+The address of a person associated with the study.
+
+-Study Person Affiliation
+The organization affiliation for a person associated with the study.
+
+-Study Person Roles
+Term to classify the role(s) performed by this person in the context of the study, which means that the
+roles reported here need not correspond to roles held withing their affiliated organization. Multiple
+annotations or values attached to one person may be provided by using a semicolon (";") as a
+separator, for example: "submitter;funder;sponsor” .The term can be free text or from, for example, a
+controlled vocabulary or an ontology. If the latter source is used the Term Accession Number and
+Term Source REF fields below are required.
+
+-Study Person Roles Term Accession Number
+The accession number from the Term Source associated with the selected term.
+
+-Study Person Roles Term Source REF
+Identifies the controlled vocabulary or ontology that this term comes from. The Source REF has to
+match one of the Term Source Name declared in the ontology section 4.1.1.
+
+----------
+TB fields:
+
+hasKeyword
+
+Could be represented by dcterms:subject 
+
+http://dublincore.org/usage/terms/history/#subjectT-001
+
+isSummarySearchable, <<< this actually says if the metadata could be searched and displayed or not
+
+priorVersion, versionInfo
+
+dcterms:isVersionOf
+dcterms:hasVersion
+
+http://dublincore.org/documents/dcmi-terms/#terms-isVersionOf
+http://dublincore.org/documents/dcmi-terms/#terms-hasVersion
+----------
+
+=================
+
+4.2 Study file
+
+In the Study file the fields are organized on a per-row basis, the first row containing column headers. The
+Study file contains contextualizing information for one or more assays. The sections below describe in details
+the Study file column’s headers, organizing them as nodes (potentially containing the string Name or File,
+previously referred to as ‘sections’), and attributes (previously referred to as ‘fields’) for nodes and node
+processing events, qualifiers for node attributes, and other valid fields.
+
+
