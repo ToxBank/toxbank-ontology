@@ -1,0 +1,55 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.toxbank</groupId>
+  <artifactId>toxbank-ontology</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  <name>Toxbank Ontology</name>
+  <description>proof of concept</description>
+  <url>https://github.com/toxbank/toxbank-ontology</url>
+
+  <properties>
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  	<junit.version>4.8.1</junit.version>
+  </properties>
+
+  <repositories>
+  	<repository>
+  		<id>mvnrepository</id>
+  		<name>mvnrepository</name>
+  		<url>http://mvnrepository.com/</url>
+  		<snapshots>
+  			<enabled>false</enabled>
+  		</snapshots>
+  	</repository>
+  </repositories>  
+
+    <build>
+  	<pluginManagement>
+  		<plugins>
+  <plugin>
+    <groupId>org.codehaus.mojo</groupId>
+    <artifactId>xml-maven-plugin</artifactId>
+    <executions>
+      <execution>
+        <goals>
+          <goal>validate</goal>
+        </goals>
+      </execution>
+    </executions>
+    <configuration>
+      <validationSets>
+        <validationSet>
+          <dir>api</dir>
+          <systemId>Toxbank.owl</systemId>
+        </validationSet>
+      </validationSets>
+    </configuration>
+  </plugin>
+		</plugins>
+	</pluginManagement>	
+  </build>
+ 
+   <inceptionYear>2011</inceptionYear>
+
+</project>
