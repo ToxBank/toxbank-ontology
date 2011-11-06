@@ -41,7 +41,6 @@
       <validationSets>
         <validationSet>
           <dir>api</dir>
-          <systemId>Toxbank.owl</systemId>
         </validationSet>
       </validationSets>
     </configuration>
