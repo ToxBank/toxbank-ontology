@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+    xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
+    xmlns:CHEBI="http://bioportal.bioontology.org/ontologies/46336/"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:isa="http://www.toxbank.net/isa.owl#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:dcterms="http://purl.org/dc/terms/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+  xml:base="http://www.toxbank.net/isa.owl">
+  <owl:Ontology rdf:about=""/>
+  <owl:Class rdf:ID="Protocol">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="ISANode"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A protocol takes one or more inputs (biological material or data) and generates one or more outputs (biological material or data). The protocols correspond to edges in the experimental graph, while materials and data correspond to the nodes. One or more Protocol REF columns should be used to specify the method used to transform a material or a data node</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="Parameter">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Protocol parameter</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="ISACollection">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A Study or an Assay</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="StudyNode">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="NamedNode"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The nodes in the experimental graph in a Study</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="AssayNode">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#NamedNode"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The nodes in the experimental graph in an Assay</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="StudyEntry">
+    <rdfs:subClassOf>
+      <owl:Class rdf:ID="ISAEntry"/>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A row (treatment) in a Study</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="Assay">
+    <rdfs:subClassOf rdf:resource="#ISACollection"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >ISA-TAB Assay</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="Study">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >ISA-TAB Study</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#ISACollection"/>
+  </owl:Class>
+  <owl:Class rdf:about="#ISAEntry">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A row (treatment) in a Study or Assay</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="#NamedNode">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The nodes in the experimental graph in a Study or Assay (either [biological] material, such as a sample or an RNA extract, or a data object)</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ISANode"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:ID="Dataset">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A pointer to the data - file name or URI</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="#ISANode">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Node or edge in the experimental graph (namednode or a protocol).</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:ID="AssayEntry">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A row in an ISA-TAB Assay</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#ISAEntry"/>
+  </owl:Class>
+  <owl:Class rdf:ID="Value">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A value, with units and assigned term from an ontology</rdfs:comment>
+  </owl:Class>
+  <owl:ObjectProperty rdf:ID="hasDataset">
+    <rdfs:range rdf:resource="#Dataset"/>
+    <rdfs:domain rdf:resource="#AssayNode"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasNext">
+    <rdfs:domain rdf:resource="#ISANode"/>
+    <rdfs:range rdf:resource="#ISANode"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasFactor">
+    <rdfs:domain rdf:resource="#NamedNode"/>
+    <rdfs:range rdf:resource="#Value"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A factor corresponds to an independent variable manipulated by the experimentalist with the intention to affect biological systems in a waythat can be measured by an assay. The value of a factor is given in the Study or Assay file,accordingly. If both Study and Assay have a  Factor Value, these must be different.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasStudyEntry">
+    <rdfs:range rdf:resource="#StudyEntry"/>
+    <rdfs:domain rdf:resource="#Study"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="isPartOfCollection">
+    <rdfs:range rdf:resource="#ISACollection"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="#ISAEntry"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasParameter">
+    <rdfs:range rdf:resource="#Parameter"/>
+    <rdfs:domain rdf:resource="#Protocol"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasAssay">
+    <rdfs:domain rdf:resource="#Study"/>
+    <rdfs:range rdf:resource="#Assay"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="isPartOfEntry">
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="hasNode"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="isPartOfStudy">
+    <owl:inverseOf rdf:resource="#hasStudyEntry"/>
+    <rdfs:domain rdf:resource="#StudyEntry"/>
+    <rdfs:range rdf:resource="#Study"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:subPropertyOf rdf:resource="#isPartOfCollection"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="isPartOfAssayEntry">
+    <rdfs:subPropertyOf rdf:resource="#isPartOfEntry"/>
+    <rdfs:range rdf:resource="#AssayEntry"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="hasAssayNode"/>
+    </owl:inverseOf>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:domain rdf:resource="#AssayNode"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasAssayNode">
+    <rdfs:domain rdf:resource="#AssayEntry"/>
+    <rdfs:range rdf:resource="#AssayNode"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="isPartOfStudyEntry">
+    <rdfs:subPropertyOf rdf:resource="#isPartOfEntry"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="hasStudyNode"/>
+    </owl:inverseOf>
+    <rdfs:domain rdf:resource="#StudyNode"/>
+    <rdfs:range rdf:resource="#StudyEntry"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="hasCharacteristic">
+    <rdfs:range rdf:resource="#Value"/>
+    <rdfs:domain rdf:resource="#NamedNode"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:ID="isPartOfAssay">
+    <rdfs:domain rdf:resource="#AssayEntry"/>
+    <rdfs:subPropertyOf rdf:resource="#isPartOfCollection"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+    <rdfs:range rdf:resource="#Assay"/>
+    <owl:inverseOf>
+      <owl:ObjectProperty rdf:ID="hasAssayEntry"/>
+    </owl:inverseOf>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasStudyNode">
+    <rdfs:range rdf:resource="#StudyNode"/>
+    <rdfs:domain rdf:resource="#StudyEntry"/>
+  </owl:ObjectProperty>
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.4.7, Build 620)  http://protege.stanford.edu -->
