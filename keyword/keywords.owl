@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!DOCTYPE rdf:RDF [
+    <!ENTITY tb "http://www.owl-ontologies.com/toxbank.owl#" >
+]>
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+    xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dcterms="http://dublincore.org/documents/dcmi-terms/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns="http://www.owl-ontologies.com/toxbank.owl#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xml:base="http://www.owl-ontologies.com/toxbank.owl">
+
+  <owl:Ontology rdf:about=""/>
+
+  <skos:Concept rdf:about="&tb;Keyword"/>
+
+  <skos:Concept rdf:about="&tb;StemCells">
+    <skos:narrower rdf:resource="&tb;Keyword" />
+    <skos:prefLabel xml:lang="en">Stem cells</skos:prefLabel>
+  </skos:Concept>
+
+  <skos:Concept rdf:about="&tb;EmbryonicStemCells">
+    <skos:narrower rdf:resource="&tb;StemCells" />
+    <skos:prefLabel xml:lang="en">Embryonic Stem Cells</skos:prefLabel>
+    <!-- also note that SKOS has other predicates for labels, also for common
+         misspellings, etc -->
+
+    <!-- If we know if the target resource is a resource owl:subClassOf
+           some owl:Class, we can use owl:equivalentClass;
+         if we know the target resource is an instance, that is
+           rdf:type owl:Class instead, we should use owl:sameAs.
+         If the target resource is not expressed in OWL whatsoever, we
+         can only use rdf:seeAlso, as in this example: -->
+    <rdf:seeAlso rdf:resource="http://pele.farmbio.uu.se/hudson/" />
+
+  </skos:Concept>
+
+</rdf:RDF>
