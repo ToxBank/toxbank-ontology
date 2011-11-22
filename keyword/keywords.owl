@@ -33,11 +33,11 @@
 
     <!-- If we know if the target resource is a resource owl:subClassOf
            some owl:Class, we can use owl:equivalentClass;
-         if we know the target resource is an instance, that is
-           rdf:type owl:Class instead, we should use owl:sameAs.
-         If the target resource is not expressed in OWL whatsoever, we
-         can only use rdf:seeAlso, as in this example: -->
-    <rdf:seeAlso rdf:resource="http://pele.farmbio.uu.se/hudson/" />
+         Otherwise, we use owl:sameAs, which can be used for both OWL
+         classes and instances. See:
+           http://answers.semanticweb.com/questions/12878/owl-equivalence-when-it-is-not-clear-if-the-resource-is-a-class-or-instance
+    -->
+    <owl:sameAs rdf:resource="http://purl.bioontology.org/ontology/MSH/D053595" />
 
   </skos:Concept>
 
