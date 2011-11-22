@@ -21,12 +21,12 @@
   <skos:Concept rdf:about="&tb;Keyword"/>
 
   <skos:Concept rdf:about="&tb;StemCells">
-    <skos:narrower rdf:resource="&tb;Keyword" />
+    <skos:broader rdf:resource="&tb;Keyword" />
     <skos:prefLabel xml:lang="en">Stem cells</skos:prefLabel>
   </skos:Concept>
 
   <skos:Concept rdf:about="&tb;EmbryonicStemCells">
-    <skos:narrower rdf:resource="&tb;StemCells" />
+    <skos:broader rdf:resource="&tb;StemCells" />
     <skos:prefLabel xml:lang="en">Embryonic Stem Cells</skos:prefLabel>
     <!-- also note that SKOS has other predicates for labels, also for common
          misspellings, etc -->
