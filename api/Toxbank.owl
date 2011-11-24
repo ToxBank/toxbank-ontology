@@ -70,6 +70,12 @@ May be replaced by http://www.epimorphics.com/public/vocabulary/org.html</rdfs:c
       http://trac.usefulinc.com/doap
     &lt;/p&gt;</rdfs:comment>
   </owl:Class>
+  <owl:FunctionalProperty rdf:about="http://onto.toxbank.net/api/hasAccessRights">
+    <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#ObjectProperty"/>
+    <rdfs:domain rdf:resource="http://onto.toxbank.net/api/TBEntity"/>
+  </owl:FunctionalProperty>
+
   <owl:ObjectProperty rdf:about="http://onto.toxbank.net/api/project">
     <rdfs:domain rdf:resource="http://onto.toxbank.net/api/TBEntity"/>
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
