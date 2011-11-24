@@ -70,7 +70,7 @@ May be replaced by http://www.epimorphics.com/public/vocabulary/org.html</rdfs:c
     <rdfs:domain rdf:resource="http://onto.toxbank.net/api/TBEntity"/>
   </owl:FunctionalProperty>
 
-  <owl:ObjectProperty rdf:about="http://onto.toxbank.net/api/project">
+  <owl:ObjectProperty rdf:about="http://onto.toxbank.net/api/hasProject">
     <rdfs:domain rdf:resource="http://onto.toxbank.net/api/TBEntity"/>
     <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >&lt;p style="margin-top: 0"&gt;
