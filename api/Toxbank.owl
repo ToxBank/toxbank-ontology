@@ -44,13 +44,7 @@ http://www.essepuntato.it/lode/http://purl.org/spar/pso
     <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >user</rdfs:label>
   </owl:Class>
-  <owl:Class rdf:about="http://onto.toxbank.net/api/AccessLevel">
-    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >&lt;p style="margin-top: 0"&gt;
-      Not sure this is needed. May be as a high level container, which is 
-      later translated into  implementation specific to AA?
-    &lt;/p&gt;</rdfs:comment>
-  </owl:Class>
+
   <owl:Class rdf:about="http://onto.toxbank.net/api/Organization">
     <rdfs:seeAlso rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >Link to the organization web site.</rdfs:seeAlso>
