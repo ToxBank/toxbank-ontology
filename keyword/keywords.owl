@@ -14,6 +14,7 @@
     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
     xml:base="http://www.owl-ontologies.com/toxbank.owl">
 
   <owl:Ontology rdf:about=""/>
@@ -39,6 +40,13 @@
     -->
     <owl:sameAs rdf:resource="http://purl.bioontology.org/ontology/MSH/D053595" />
 
+<rdfs:seeAlso>
+ <rdf:Description rdf:about="http://somehost/somestuff.html">
+<dc:description>Some stuff description</dc:description>
+</rdf:Description>
+</rdfs:seeAlso>
+  
   </skos:Concept>
+
 
 </rdf:RDF>
